@@ -46,7 +46,7 @@ class ShowProducts extends Controller
 
     public function deleteProduct( Request $request){
         if( $request ){
-            $deletedRows = Products::where('active', 0)->delete();
+            $deletedRows = Products::where('id', $request->id)->delete();
             if( $deletedRows ) {
                 return response()->json(["success" => "Datos Eliminados"], 200);
             }

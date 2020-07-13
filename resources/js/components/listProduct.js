@@ -31,14 +31,14 @@ export default class ListProduct extends Component {
 
     deleteItem(item){
         console.log("deleting item... ", item);
-        axios.delete(`http://localhost:80/clase/public/api/delete/product`, item ).then(res => {
+        axios.delete(`http://localhost:8080/clase/public/api/delete/product`, item ).then(res => {
             this.setState({ openModal: false });
             alert("Se ha eliminado correctamente");
         });
     }
 
     editItem(){
-        axios.patch(`http://localhost:80/clase/public/api/edit/product`, this.state.selectedItem ).then(res => {
+        axios.patch(`http://localhost:8080/clase/public/api/edit/product`, this.state.selectedItem ).then(res => {
             this.setState({ openModal: false });
             alert("Se ha guardado correctamente");
             if(res){

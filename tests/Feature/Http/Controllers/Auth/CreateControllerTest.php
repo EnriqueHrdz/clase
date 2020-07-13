@@ -6,48 +6,73 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class CreateControllerTest extends TestCase
+class LoginControllerTest extends TestCase
 {
-<<<<<<< HEAD
     use RefreshDatabase, WithFaker;
-=======
->>>>>>> ab52d80be4c9009092d196cb1fed2fda58dfee67
     /**
      * A basic feature test example.
      *
      * @return void
      */
+    
+    
     public function testExample()
     {
         $response = $this->get('/');
 
         $response->assertStatus(200);
-    }
+    } 
+
+    // /** @test  */
+    // public function Test_showproducts(){
+    //     $response = $this->get('show/stores');
+
+    //     $response->assertStatus(200);
+
+    // } 
+
     /** @test  */
-<<<<<<< HEAD
-    public function test_createproducts(){
+    public function Test_saveproducts(){
         $this->withoutMiddleware();
-        $response = $this->post('api/delete/product/1', [
+        $response = $this->post('api/save/product', [
             "name" => "sabrita",
             "description" => "aire",
             "store_id" => 1,
             "amount" => 2.5
+
         ] );
-        }
-        public function test_deleteproduct(){
-            $delete = factory ( api/delete/product :: class) -> test_createproducts ();
-            
-            $this -> delete ( 'api/delete/product' .$delete -> id ) -> afirmarResponseStatus(200);
-            
-        }
 
-=======
-    public function create_products(){
-
-        $response = $this->post('new/product');
-
-        $response->assertStatus(405);
+        $response->assertJsonFragment(["success" => "Datos Guardados correctamente"]);
+        //$response->assertStatus(404);
+        // $response->assertSessionHasErrors('nombre');
 
     }
->>>>>>> ab52d80be4c9009092d196cb1fed2fda58dfee67
+
+    /** @test  */
+    public function Test_updateproducts(){
+        $this->withoutMiddleware();
+        $response = $this->patchJson('api/edit/product', [
+            "name" => "sabrita",
+            "id" => 1
+
+        ] );
+
+        $response->assertStatus(200);
+
+    }
+
+    /** @test  */
+    public function test_delete_product(){
+        $this->withoutMiddleware();
+        $response = $this->deleteJson('api/delete/product', [
+            "id" => 1
+
+        ] );
+
+        $response->assertStatus(200);
+
+    }
+
 }
+
+?>
